@@ -4,7 +4,7 @@
             <div class="col-12 form-group">
                 <label class="col-form-label col-form-label-lg">First Name <span class="text-danger">*</span></label>
                 <input type="text" v-model.trim="v$.firstName.$model" :class="{'is-invalid': validationStatus(v$.firstName)}" class="form-control form-control-lg">
-                <div v-if="v$.firstName.required" class="invalid-feedback">Must be valid / only alphabetic and no longer than 20.</div>
+                <div v-if="v$.firstName.required" class="invalid-feedback">Must be valid /  only alphabetic and no longer than 20.</div>
             </div>
             <div class="col-12 form-group">
                 <label class="col-form-label col-form-label-lg">Last Name <span class="text-danger">*</span></label>
@@ -13,7 +13,7 @@
 
             </div>
             <div class="col-12 form-group text-center">
-                <button class="btn btn-vue btn-lg col-4 mt-2">Submit</button>
+                <button class="btn btn-vue btn-lg mt-2">Submit</button>
             </div>
         </div>
     </form>

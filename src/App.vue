@@ -1,10 +1,6 @@
 <template>
-  <div id="app" class="h-100">
-    <div class="container-fluid h-100">
-      <div class="col-md-12 h-100 d-flex justify-content-center align-items-center">
-            <NameForm />
-      </div>
-    </div>
+  <div id="app" class="col-md-12 h-100 d-flex justify-content-center align-items-center">
+    <NameForm />
   </div>
 </template>
 
