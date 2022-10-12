@@ -21,11 +21,31 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required, maxLength, alpha } from '@vuelidate/validators'
+import axios from 'axios';
+
+const download = (firstName, lastName) => {
+	// credit: https://www.bitdegree.org/learn/javascript-download
+	let filename = 'name.csv';
+	let text = this.Papa.unparse({firstName: this.firstName, lastName: this.lastName});
+	
+	let element = document.createElement('a');
+	element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(text));
+	element.setAttribute('download', filename);
+
+	element.style.display = 'none';
+	document.body.appendChild(element);
+
+	element.click();
+	document.body.removeChild(element); 
+	
+}
+
+const url = 'http://localhost:5000/names';
 
 export default {
     name: 'NameForm',
     setup: function() {
-    return { v$: useVuelidate() }
+    return { v$: useVuelidate()}
     },
     data: function() {
         return {
@@ -45,11 +65,20 @@ export default {
         },
 
         submit: function() {
+            if (this.firstName === this.lastName) {
+                alert('No Duplicates!');
+            } else {
+                this.v$.$touch();
+                if (this.v$.$pendding || this.v$.$error) return;
 
-            this.v$.$touch();
-            if (this.v$.$pendding || this.v$.$error) return;
+                axios.post(
+                    url, 
+                    { firstName: this.firstName, lastName: this.lastName }
+                ).then((res) => console.log(res));
 
-            alert('Data Submit');
+                download(this.firstName, this.lastName);
+            }
+            
         }
     }
 }
